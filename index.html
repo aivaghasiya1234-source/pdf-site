@@ -1,1 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Premium Download Site</title>
 
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+}
+
+body{
+    background:linear-gradient(135deg,#0f0f0f,#1a1a1a,#111);
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+}
+
+.container{
+    width:520px;
+    max-width:100%;
+    background:rgba(255,255,255,0.08);
+    border:1px solid rgba(255,255,255,0.15);
+    backdrop-filter:blur(18px);
+    border-radius:22px;
+    padding:35px;
+    color:white;
+    box-shadow:0 20px 60px rgba(0,0,0,0.35);
+    animation:fadeIn 0.6s ease;
+}
+
+h1{
+    margin-bottom:15px;
+    font-size:30px;
+}
+
+p{
+    color:#ddd;
+    margin-bottom:20px;
+}
+
+input{
+    width:100%;
+    padding:14px;
+    border:none;
+    border-radius:10px;
+    margin:10px 0;
+    font-size:15px;
+}
+
+button{
+    width:100%;
+    padding:14px;
+    margin:10px 0;
+    border:none;
+    border-radius:12px;
+    font-size:16px;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+button:hover{
+    transform:translateY(-2px);
+}
+
+.blue{
+    background:#007bff;
+    color:white;
+}
+
+.green{
+    background:#28a745;
+    color:white;
+}
+
+.red{
+    background:#dc3545;
+    color:white;
+}
+
+.gray{
+    background:#444;
+    color:white;
+}
+
+.hidden{
+    display:none;
+}
+
+.file-box{
+    background:rgba(255,255,255,0.08);
+    border:1px solid rgba(255,255,255,0.1);
+    padding:14px;
+    border-radius:12px;
+    margin:12px 0;
+}
+
+.file-name{
+    margin-bottom:10px;
+    word-break:break-word;
+}
+
+.small-btn{
+    width:auto;
+    padding:10px 18px;
+}
+
+#fileList{
+    max-height:300px;
+    overflow-y:auto;
+}
+
+@keyframes fadeIn{
+    from{
+        opacity:0;
+        transform:translateY(20px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+    <!-- MENU -->
+    <div id="menuPage">
+        <h1>Premium File Site</h1>
+        <p>Select Panel</p>
+
+        <button class="blue" onclick="openPasswordPage()">Admin Panel</button>
+        <button class="green" onclick="openUserPanel()">User Panel</button>
+    </div>
+
+    <!-- PASSWORD -->
+    <div id="passwordPage" class="hidden">
+        <h1>Admin Login</h1>
+        <p>Password Required</p>
+
+        <input type="password" id="adminPassword" placeholder="Enter Password">
+
+        <button class="blue" onclick="checkPassword()">Login</button>
+        <button class="gray" onclick="goHome()">Back</button>
+
+        <p id="passStatus"></p>
+    </div>
+
+    <!-- ADMIN -->
+    <div id="adminPage" class="hidden">
+        <h1>Admin Panel</h1>
+        <p>Add File Link</p>
+
+        <input type="text" id="fileName" placeholder="Enter File Name">
+        <input type="text" id="fileLink" placeholder="Paste Direct Download Link">
+
+        <button class="green" onclick="addFile()">Add File</button>
+        <button class="red" onclick="clearAll()">Clear All Files</button>
+        <button class="gray" onclick="goHome()">Back</button>
+
+        <p id="adminStatus"></p>
+    </div>
+
+    <!-- USER -->
+    <div id="userPage" class="hidden">
+        <h1>User Panel</h1>
+        <p>Available Files</p>
+
+        <div id="fileList"></div>
+
+        <button class="gray" onclick="goHome()">Back</button>
+    </div>
+
+</div>
+
+<script>
+let files = JSON.parse(localStorage.getItem("files")) || [];
+
+function saveFiles(){
+    localStorage.setItem("files", JSON.stringify(files));
+}
+
+function hideAll(){
+    document.getElementById("menuPage").classList.add("hidden");
+    document.getElementById("passwordPage").classList.add("hidden");
+    document.getElementById("adminPage").classList.add("hidden");
+    document.getElementById("userPage").classList.add("hidden");
+}
+
+function goHome(){
+    hideAll();
+    document.getElementById("menuPage").classList.remove("hidden");
+}
+
+function openPasswordPage(){
+    hideAll();
+    document.getElementById("passwordPage").classList.remove("hidden");
+}
+
+function openUserPanel(){
+    hideAll();
+    document.getElementById("userPage").classList.remove("hidden");
+    loadFiles();
+}
+
+function checkPassword(){
+    const pass = document.getElementById("adminPassword").value;
+    const status = document.getElementById("passStatus");
+
+    if(pass === "2008"){
+        hideAll();
+        document.getElementById("adminPage").classList.remove("hidden");
+        status.innerText = "";
+    }else{
+        status.innerText = "Wrong Password ❌";
+    }
+}
+
+function addFile(){
+    const name = document.getElementById("fileName").value.trim();
+    const link = document.getElementById("fileLink").value.trim();
+    const status = document.getElementById("adminStatus");
+
+    if(!name || !link){
+        status.innerText = "Fill all fields";
+        return;
+    }
+
+    files.push({
+        name:name,
+        link:link
+    });
+
+    saveFiles();
+
+    document.getElementById("fileName").value = "";
+    document.getElementById("fileLink").value = "";
+
+    status.innerText = "File Added Successfully ✅";
+}
+
+function loadFiles(){
+    const list = document.getElementById("fileList");
+
+    if(files.length === 0){
+        list.innerHTML = "No Files Available";
+        return;
+    }
+
+    list.innerHTML = "";
+
+    files.forEach(file => {
+        list.innerHTML += `
+            <div class="file-box">
+                <div class="file-name">${file.name}</div>
+                <a href="${file.link}" target="_blank">
+                    <button class="green small-btn">Download</button>
+                </a>
+            </div>
+        `;
+    });
+}
+
+function clearAll(){
+    files = [];
+    saveFiles();
+    document.getElementById("adminStatus").innerText = "All Files Deleted ✅";
+}
+</script>
+
+</body>
+</html>
