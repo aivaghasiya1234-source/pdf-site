@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Premium Download Site</title>
-
+<title>Premium Download Site Pro</title>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
 <style>
 *{
     margin:0;
@@ -14,116 +14,141 @@
 }
 
 body{
-    background:linear-gradient(-45deg,#0f0f0f,#1a1a1a,#111,#181818);
-    background-size:400% 400%;
-    animation:bgMove 10s ease infinite;
     min-height:100vh;
+    background:linear-gradient(-45deg,#0a0a0a,#121212,#1a1a1a,#111827);
+    background-size:400% 400%;
+    animation:bgMove 12s ease infinite;
     display:flex;
     justify-content:center;
     align-items:center;
     padding:20px;
+    color:#fff;
 }
 
 .container{
-    width:520px;
+    width:560px;
     max-width:100%;
     background:rgba(255,255,255,0.08);
     border:1px solid rgba(255,255,255,0.15);
-    backdrop-filter:blur(18px);
-    border-radius:22px;
-    padding:35px;
-    color:white;
-    box-shadow:0 20px 60px rgba(0,0,0,0.35);
-    animation:fadeIn 0.7s ease;
+    backdrop-filter:blur(20px);
+    border-radius:24px;
+    padding:36px;
+    box-shadow:0 25px 80px rgba(0,0,0,0.45);
+    animation:fadeUp .8s ease;
 }
 
 h1{
-    margin-bottom:15px;
     font-size:30px;
-    animation:slideDown 0.6s ease;
+    margin-bottom:10px;
 }
 
 p{
-    color:#ddd;
-    margin-bottom:20px;
+    color:#d1d5db;
+    margin-bottom:18px;
 }
 
 input{
     width:100%;
-    padding:14px;
+    padding:15px;
     border:none;
-    border-radius:10px;
+    border-radius:14px;
     margin:10px 0;
-    font-size:15px;
+    background:rgba(255,255,255,0.08);
+    color:white;
     outline:none;
-    transition:0.3s;
+    transition:.3s;
 }
 
 input:focus{
-    transform:scale(1.02);
-    box-shadow:0 0 15px rgba(255,255,255,0.15);
+    transform:translateY(-2px);
+    box-shadow:0 0 18px rgba(255,255,255,0.12);
 }
 
 button{
     width:100%;
     padding:14px;
-    margin:10px 0;
     border:none;
-    border-radius:12px;
-    font-size:16px;
+    border-radius:14px;
+    font-size:15px;
     cursor:pointer;
-    transition:0.3s;
+    margin:10px 0;
+    transition:.3s;
 }
 
 button:hover{
-    transform:translateY(-3px) scale(1.01);
+    transform:translateY(-3px);
 }
 
-.blue{ background:#007bff; color:white; }
-.green{ background:#28a745; color:white; }
-.red{ background:#dc3545; color:white; }
-.gray{ background:#444; color:white; }
+.blue{background:#2563eb;color:white;}
+.green{background:#16a34a;color:white;}
+.red{background:#dc2626;color:white;}
+.gray{background:#374151;color:white;}
 
-.hidden{ display:none; }
+.hidden{display:none;}
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:12px;
+    margin:20px 0;
+}
+
+.card{
+    background:rgba(255,255,255,0.07);
+    padding:16px;
+    border-radius:16px;
+    border:1px solid rgba(255,255,255,0.08);
+}
+
+.card h3{
+    font-size:14px;
+    color:#d1d5db;
+}
+
+.card span{
+    display:block;
+    margin-top:8px;
+    font-size:22px;
+    font-weight:bold;
+}
 
 .file-box{
-    background:rgba(255,255,255,0.08);
-    border:1px solid rgba(255,255,255,0.1);
-    padding:14px;
-    border-radius:12px;
+    background:rgba(255,255,255,0.07);
+    border:1px solid rgba(255,255,255,0.08);
+    padding:15px;
+    border-radius:14px;
     margin:12px 0;
-    animation:fadeIn 0.5s ease;
+    animation:fadeUp .5s ease;
 }
 
 .file-name{
     margin-bottom:10px;
-    word-break:break-word;
+    font-weight:600;
 }
 
-.small-btn{
-    width:auto;
-    padding:10px 18px;
+.badge{
+    display:inline-block;
+    font-size:12px;
+    padding:6px 10px;
+    border-radius:20px;
+    background:rgba(37,99,235,0.2);
+    margin-bottom:10px;
 }
 
 #fileList{
-    max-height:300px;
+    max-height:320px;
     overflow-y:auto;
 }
 
-@keyframes fadeIn{
-    from{ opacity:0; transform:translateY(20px); }
-    to{ opacity:1; transform:translateY(0); }
-}
-
-@keyframes slideDown{
-    from{ opacity:0; transform:translateY(-20px); }
-    to{ opacity:1; transform:translateY(0); }
+@keyframes fadeUp{
+    from{opacity:0;transform:translateY(20px)}
+    to{opacity:1;transform:translateY(0)}
 }
 
 @keyframes bgMove{
-    0%{ background-position:0% 50%; }
-    50%{ background-position:100% 50%; }
-    100%{ background-position:0% 50%; }
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
 }
 </style>
 </head>
@@ -131,163 +156,164 @@ button:hover{
 
 <div class="container">
 
-    <div id="menuPage">
-        <h1>Premium File Site</h1>
-        <p>Select Panel</p>
+<div id="menuPage">
+    <h1><i class="fa-solid fa-cloud-arrow-down"></i> Premium Vault</h1>
+    <p>Professional Download Platform</p>
 
-        <button class="blue" onclick="openPasswordPage()">Admin Panel</button>
-        <button class="green" onclick="openUserPanel()">User Panel</button>
+    <div class="stats">
+        <div class="card">
+            <h3>Total Files</h3>
+            <span id="totalFiles">0</span>
+        </div>
+        <div class="card">
+            <h3>Total Downloads</h3>
+            <span id="totalDownloads">0</span>
+        </div>
     </div>
 
-    <div id="passwordPage" class="hidden">
-        <h1>Admin Login</h1>
-        <p>Password Required</p>
+    <button class="blue" onclick="openPasswordPage()">Admin Panel</button>
+    <button class="green" onclick="openUserPanel()">User Panel</button>
+</div>
 
-        <input type="password" id="adminPassword" placeholder="Enter Password">
+<div id="passwordPage" class="hidden">
+    <h1>Admin Login</h1>
+    <p>Secure Access Required</p>
+    <input type="password" id="adminPassword" placeholder="Enter Password">
+    <button class="blue" onclick="checkPassword()">Login</button>
+    <button class="gray" onclick="goHome()">Back</button>
+    <p id="passStatus"></p>
+</div>
 
-        <button class="blue" onclick="checkPassword()">Login</button>
-        <button class="gray" onclick="goHome()">Back</button>
+<div id="adminPage" class="hidden">
+    <h1>Admin Dashboard</h1>
+    <p>Add New Download File</p>
 
-        <p id="passStatus"></p>
-    </div>
+    <input type="text" id="fileName" placeholder="File Name">
+    <input type="text" id="fileCategory" placeholder="Category (PDF, Game, Movie)">
+    <input type="text" id="fileLink" placeholder="Direct Download Link">
 
-    <div id="adminPage" class="hidden">
-        <h1>Admin Panel</h1>
-        <p>Add File Link</p>
+    <button class="green" onclick="addFile()">Add File</button>
+    <button class="red" onclick="clearAll()">Clear All Files</button>
+    <button class="gray" onclick="goHome()">Back</button>
 
-        <input type="text" id="fileName" placeholder="Enter File Name">
-        <input type="text" id="fileLink" placeholder="Paste Direct Download Link">
+    <p id="adminStatus"></p>
+</div>
 
-        <button class="green" onclick="addFile()">Add File</button>
-        <button class="red" onclick="clearAll()">Clear All Files</button>
-        <button class="gray" onclick="goHome()">Back</button>
+<div id="userPage" class="hidden">
+    <h1>User Panel</h1>
+    <p>Available Premium Files</p>
 
-        <p id="adminStatus"></p>
-    </div>
+    <input type="text" id="searchBox" placeholder="Search files..." onkeyup="loadFiles()">
 
-    <div id="userPage" class="hidden">
-        <h1>User Panel</h1>
-        <p>Available Files</p>
+    <div id="fileList"></div>
 
-        <div id="fileList"></div>
-
-        <button class="gray" onclick="goHome()">Back</button>
-    </div>
+    <button class="gray" onclick="goHome()">Back</button>
+</div>
 
 </div>
 
 <script>
-let files = JSON.parse(localStorage.getItem("files")) || [];
+let files = JSON.parse(localStorage.getItem('files')) || [];
+let totalDownloads = Number(localStorage.getItem('downloads')) || 0;
 
 function saveFiles(){
-    localStorage.setItem("files", JSON.stringify(files));
+    localStorage.setItem('files', JSON.stringify(files));
+    localStorage.setItem('downloads', totalDownloads);
+    updateStats();
+}
+
+function updateStats(){
+    document.getElementById('totalFiles').innerText = files.length;
+    document.getElementById('totalDownloads').innerText = totalDownloads;
 }
 
 function hideAll(){
-    document.getElementById("menuPage").classList.add("hidden");
-    document.getElementById("passwordPage").classList.add("hidden");
-    document.getElementById("adminPage").classList.add("hidden");
-    document.getElementById("userPage").classList.add("hidden");
+    ['menuPage','passwordPage','adminPage','userPage'].forEach(id=>{
+        document.getElementById(id).classList.add('hidden');
+    });
 }
 
 function goHome(){
     hideAll();
-    document.getElementById("menuPage").classList.remove("hidden");
+    document.getElementById('menuPage').classList.remove('hidden');
+    updateStats();
 }
 
 function openPasswordPage(){
     hideAll();
-    document.getElementById("passwordPage").classList.remove("hidden");
-    setTimeout(() => {
-        document.getElementById("adminPassword").focus();
-    }, 100);
+    document.getElementById('passwordPage').classList.remove('hidden');
 }
 
 function openUserPanel(){
     hideAll();
-    document.getElementById("userPage").classList.remove("hidden");
+    document.getElementById('userPage').classList.remove('hidden');
     loadFiles();
 }
 
 function checkPassword(){
-    const pass = document.getElementById("adminPassword").value;
-    const status = document.getElementById("passStatus");
-
-    if(pass === "2008"){
-        hideAll();
-        document.getElementById("adminPage").classList.remove("hidden");
-        status.innerText = "";
-    }else{
-        status.innerText = "Wrong Password ❌";
-    }
+    const pass = document.getElementById('adminPassword').value;
+    document.getElementById('passStatus').innerText = pass === '2008' ? (hideAll(), document.getElementById('adminPage').classList.remove('hidden'), '') : 'Wrong Password ❌';
 }
 
 function addFile(){
-    const name = document.getElementById("fileName").value.trim();
-    const link = document.getElementById("fileLink").value.trim();
-    const status = document.getElementById("adminStatus");
+    const name = document.getElementById('fileName').value.trim();
+    const category = document.getElementById('fileCategory').value.trim();
+    const link = document.getElementById('fileLink').value.trim();
+    const status = document.getElementById('adminStatus');
 
-    if(!name || !link){
-        status.innerText = "Fill all fields";
+    if(!name || !category || !link){
+        status.innerText = 'Fill all fields';
         return;
     }
 
-    files.push({ name, link });
+    files.push({name, category, link});
     saveFiles();
 
-    document.getElementById("fileName").value = "";
-    document.getElementById("fileLink").value = "";
+    document.getElementById('fileName').value='';
+    document.getElementById('fileCategory').value='';
+    document.getElementById('fileLink').value='';
 
-    status.innerText = "File Added Successfully ✅";
+    status.innerText = 'File Added Successfully ✅';
 }
 
 function loadFiles(){
-    const list = document.getElementById("fileList");
+    const list = document.getElementById('fileList');
+    const search = document.getElementById('searchBox').value.toLowerCase();
 
-    if(files.length === 0){
-        list.innerHTML = "No Files Available";
+    let filtered = files.filter(file => file.name.toLowerCase().includes(search));
+
+    if(filtered.length === 0){
+        list.innerHTML = 'No Files Found';
         return;
     }
 
-    list.innerHTML = "";
+    list.innerHTML = '';
 
-    files.forEach(file => {
+    filtered.forEach(file => {
         list.innerHTML += `
             <div class="file-box">
+                <div class="badge">${file.category}</div>
                 <div class="file-name">${file.name}</div>
-                <a href="${file.link}" target="_blank">
-                    <button class="green small-btn">Download</button>
+                <a href="${file.link}" target="_blank" onclick="increaseDownload()">
+                    <button class="green">Download Now</button>
                 </a>
             </div>
         `;
     });
 }
 
+function increaseDownload(){
+    totalDownloads++;
+    saveFiles();
+}
+
 function clearAll(){
     files = [];
     saveFiles();
-    document.getElementById("adminStatus").innerText = "All Files Deleted ✅";
+    document.getElementById('adminStatus').innerText = 'All Files Deleted ✅';
 }
 
-// ENTER KEY SUPPORT
-
-document.getElementById("adminPassword").addEventListener("keydown", function(e){
-    if(e.key === "Enter"){
-        checkPassword();
-    }
-});
-
-document.getElementById("fileName").addEventListener("keydown", function(e){
-    if(e.key === "Enter"){
-        document.getElementById("fileLink").focus();
-    }
-});
-
-document.getElementById("fileLink").addEventListener("keydown", function(e){
-    if(e.key === "Enter"){
-        addFile();
-    }
-});
+updateStats();
 </script>
 
 </body>
