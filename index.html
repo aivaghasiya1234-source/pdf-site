@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Premium Download Site Pro</title>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+<title>Premium Dark Animated Download Site V2</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <style>
 *{
@@ -13,102 +13,148 @@
     box-sizing:border-box;
     font-family:Arial,sans-serif;
 }
+
 body{
     min-height:100vh;
-    background:linear-gradient(-45deg,#0a0a0a,#121212,#1a1a1a,#111827);
+    background:linear-gradient(-45deg,#050505,#0f172a,#111827,#000000);
     background-size:400% 400%;
     animation:bgMove 12s ease infinite;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    padding:20px;
     color:#fff;
+    padding:20px;
 }
+
+@keyframes bgMove{
+    0%{background-position:0% 50%;}
+    50%{background-position:100% 50%;}
+    100%{background-position:0% 50%;}
+}
+
 .container{
-    width:560px;
-    max-width:100%;
-    background:rgba(255,255,255,.08);
-    border:1px solid rgba(255,255,255,.15);
-    backdrop-filter:blur(20px);
-    border-radius:24px;
-    padding:36px;
-    box-shadow:0 25px 80px rgba(0,0,0,.45);
+    max-width:1100px;
+    margin:auto;
 }
-h1{
-    font-size:30px;
+
+.hero{
+    background:rgba(255,255,255,0.07);
+    border:1px solid rgba(255,255,255,0.12);
+    backdrop-filter:blur(18px);
+    border-radius:28px;
+    padding:40px;
+    box-shadow:0 20px 60px rgba(0,0,0,.4);
+    margin-bottom:25px;
+    text-align:center;
+}
+
+.hero h1{
+    font-size:38px;
     margin-bottom:10px;
 }
-p{
+
+.hero p{
     color:#d1d5db;
-    margin-bottom:18px;
+    margin-bottom:20px;
 }
+
+.slider-text{
+    font-size:22px;
+    font-weight:bold;
+    color:#60a5fa;
+    min-height:35px;
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:18px;
+    margin-bottom:25px;
+}
+
+.card{
+    background:rgba(255,255,255,0.06);
+    border:1px solid rgba(255,255,255,0.1);
+    border-radius:22px;
+    padding:22px;
+    transition:.3s;
+}
+
+.card:hover{
+    transform:translateY(-6px);
+}
+
+.card h3{
+    margin-bottom:10px;
+}
+
+.card span{
+    font-size:28px;
+    font-weight:bold;
+}
+
+.panel{
+    background:rgba(255,255,255,0.06);
+    border:1px solid rgba(255,255,255,0.1);
+    border-radius:24px;
+    padding:30px;
+    margin-bottom:25px;
+}
+
 input{
     width:100%;
     padding:15px;
+    margin:10px 0;
     border:none;
     border-radius:14px;
-    margin:10px 0;
-    background:rgba(255,255,255,.08);
+    background:rgba(255,255,255,0.08);
     color:#fff;
     outline:none;
 }
+
 button{
     width:100%;
     padding:14px;
     border:none;
     border-radius:14px;
-    font-size:15px;
     cursor:pointer;
+    font-size:15px;
     margin:10px 0;
+    transition:.3s;
 }
+
+button:hover{
+    transform:scale(1.02);
+}
+
 .blue{background:#2563eb;color:#fff;}
 .green{background:#16a34a;color:#fff;}
 .red{background:#dc2626;color:#fff;}
 .gray{background:#374151;color:#fff;}
 .hidden{display:none;}
 
-.stats{
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:12px;
-    margin:20px 0;
-}
-.card{
-    background:rgba(255,255,255,.07);
-    padding:16px;
-    border-radius:16px;
-}
-.card span{
-    display:block;
-    margin-top:8px;
-    font-size:22px;
-    font-weight:bold;
-}
 .file-box{
-    background:rgba(255,255,255,.07);
-    padding:15px;
-    border-radius:14px;
-    margin:12px 0;
+    background:rgba(255,255,255,0.06);
+    border-radius:18px;
+    padding:18px;
+    margin:15px 0;
 }
-.file-name{
-    margin:10px 0;
-    font-weight:600;
-}
+
 .badge{
     display:inline-block;
-    font-size:12px;
-    padding:6px 10px;
-    border-radius:20px;
+    padding:6px 12px;
+    border-radius:30px;
     background:rgba(37,99,235,.2);
+    font-size:12px;
+    margin-bottom:10px;
 }
-#fileList{
-    max-height:320px;
-    overflow-y:auto;
+
+.file-name{
+    font-size:18px;
+    font-weight:600;
+    margin-bottom:12px;
 }
-@keyframes bgMove{
-0%{background-position:0% 50%}
-50%{background-position:100% 50%}
-100%{background-position:0% 50%}
+
+.status{
+    margin-top:10px;
+    color:#93c5fd;
 }
 </style>
 </head>
@@ -116,245 +162,142 @@ button{
 
 <div class="container">
 
-<!-- MAIN PASSWORD LOCK -->
-<div id="lockPage">
-    <h1><i class="fa-solid fa-lock"></i> Secure Access</h1>
-    <p>Enter Password To Open Site</p>
-
-    <input type="password" id="mainPassword" placeholder="Enter Password">
-    <button class="blue" onclick="unlockSite()">Enter Site</button>
-
-    <p id="lockMsg"></p>
+<div class="hero">
+    <h1><i class="fa-solid fa-cloud-arrow-down"></i> Premium Vault Pro</h1>
+    <p>Dark Animated Dynamic Download Platform</p>
+    <div class="slider-text" id="sliderText">Premium Downloads</div>
 </div>
 
-<!-- SITE -->
-<div id="siteContent" class="hidden">
-
-<!-- MENU -->
-<div id="menuPage">
-    <h1><i class="fa-solid fa-cloud-arrow-down"></i> Premium Vault</h1>
-    <p>Professional Download Platform</p>
-
-    <div class="stats">
-        <div class="card">
-            <h3>Total Files</h3>
-            <span id="totalFiles">0</span>
-        </div>
-
-        <div class="card">
-            <h3>Total Downloads</h3>
-            <span id="totalDownloads">0</span>
-        </div>
+<div class="grid">
+    <div class="card">
+        <h3>Total Files</h3>
+        <span id="totalFiles">0</span>
     </div>
 
-    <button class="blue" onclick="openPasswordPage()">Admin Panel</button>
-    <button class="green" onclick="openUserPanel()">User Panel</button>
+    <div class="card">
+        <h3>Total Downloads</h3>
+        <span id="totalDownloads">0</span>
+    </div>
 </div>
 
-<!-- ADMIN LOGIN -->
-<div id="passwordPage" class="hidden">
-    <h1>Admin Login</h1>
-    <p>Secure Access Required</p>
-
-    <input type="password" id="adminPassword" placeholder="Enter Password">
-    <button class="blue" onclick="checkPassword()">Login</button>
-    <button class="gray" onclick="goHome()">Back</button>
-
-    <p id="passStatus"></p>
-</div>
-
-<!-- ADMIN -->
-<div id="adminPage" class="hidden">
-    <h1>Admin Dashboard</h1>
-    <p>Add New Download File</p>
+<div class="panel" id="mainPanel">
+    <h2>Admin Add File</h2>
 
     <input type="text" id="fileName" placeholder="File Name">
     <input type="text" id="fileCategory" placeholder="Category">
     <input type="text" id="fileLink" placeholder="Direct Download Link">
 
     <button class="green" onclick="addFile()">Add File</button>
-    <button class="red" onclick="clearAll()">Clear All Files</button>
-    <button class="gray" onclick="goHome()">Back</button>
+    <button class="red" onclick="clearAll()">Delete All Files</button>
 
-    <p id="adminStatus"></p>
+    <p class="status" id="adminStatus"></p>
 </div>
 
-<!-- USER -->
-<div id="userPage" class="hidden">
-    <h1>User Panel</h1>
-    <p>Available Premium Files</p>
+<div class="panel">
+    <h2>User Download Panel</h2>
 
     <input type="text" id="searchBox" placeholder="Search files..." onkeyup="loadFiles()">
 
     <div id="fileList"></div>
-
-    <button class="gray" onclick="goHome()">Back</button>
 </div>
 
-</div>
 </div>
 
 <script>
-/* DATA */
 let files = JSON.parse(localStorage.getItem('files')) || [];
 let totalDownloads = Number(localStorage.getItem('downloads')) || 0;
 
-/* MAIN SITE PASSWORD */
-const SITE_PASSWORD = "root2008";
+const sliderWords = [
+    "Premium Downloads",
+    "VIP Access Files",
+    "Latest Premium Content",
+    "Fast Direct Downloads"
+];
 
-/* SAVE */
-function saveFiles(){
+let slideIndex = 0;
+
+function startSlider(){
+    setInterval(()=>{
+        slideIndex = (slideIndex + 1) % sliderWords.length;
+        document.getElementById('sliderText').innerText = sliderWords[slideIndex];
+    },2000);
+}
+
+function saveData(){
     localStorage.setItem('files', JSON.stringify(files));
     localStorage.setItem('downloads', totalDownloads);
     updateStats();
 }
 
-/* STATS */
 function updateStats(){
-    totalFiles.innerText = files.length;
-    totalDownloads.innerText = totalDownloads;
+    document.getElementById('totalFiles').innerText = files.length;
+    document.getElementById('totalDownloads').innerText = totalDownloads;
 }
 
-/* FIRST LOCK SCREEN */
-function unlockSite(){
-    let pass = document.getElementById("mainPassword").value;
-
-    if(pass === SITE_PASSWORD){
-        document.getElementById("lockPage").classList.add("hidden");
-        document.getElementById("siteContent").classList.remove("hidden");
-        goHome();
-        startIdleTimer();
-    }else{
-        document.getElementById("lockMsg").innerText = "Wrong Password ❌";
-    }
-}
-
-/* PAGE CONTROL */
-function hideAll(){
-    ["menuPage","passwordPage","adminPage","userPage"].forEach(id=>{
-        document.getElementById(id).classList.add("hidden");
-    });
-}
-
-function goHome(){
-    hideAll();
-    menuPage.classList.remove("hidden");
-    updateStats();
-}
-
-function openPasswordPage(){
-    hideAll();
-    passwordPage.classList.remove("hidden");
-}
-
-function openUserPanel(){
-    hideAll();
-    userPage.classList.remove("hidden");
-    loadFiles();
-}
-
-/* ADMIN PASSWORD */
-function checkPassword(){
-    let pass = adminPassword.value;
-
-    if(pass === "987654321"){
-        hideAll();
-        adminPage.classList.remove("hidden");
-        passStatus.innerText = "";
-    }else{
-        passStatus.innerText = "Wrong Password ❌";
-    }
-}
-
-/* ADD FILE */
 function addFile(){
-    let name = fileName.value.trim();
-    let category = fileCategory.value.trim();
-    let link = fileLink.value.trim();
+    let name = document.getElementById('fileName').value.trim();
+    let category = document.getElementById('fileCategory').value.trim();
+    let link = document.getElementById('fileLink').value.trim();
 
     if(!name || !category || !link){
-        adminStatus.innerText = "Fill all fields";
+        document.getElementById('adminStatus').innerText = 'Please fill all fields';
         return;
     }
 
-    files.push({name,category,link});
-    saveFiles();
+    files.push({name, category, link});
+    saveData();
+    loadFiles();
 
-    fileName.value="";
-    fileCategory.value="";
-    fileLink.value="";
+    document.getElementById('fileName').value = '';
+    document.getElementById('fileCategory').value = '';
+    document.getElementById('fileLink').value = '';
 
-    adminStatus.innerText = "File Added Successfully ✅";
+    document.getElementById('adminStatus').innerText = 'File Added Successfully ✅';
 }
 
-/* LOAD FILES */
 function loadFiles(){
-    let list = fileList;
-    let search = searchBox.value.toLowerCase();
+    let list = document.getElementById('fileList');
+    let search = document.getElementById('searchBox').value.toLowerCase();
 
     let filtered = files.filter(file =>
         file.name.toLowerCase().includes(search)
     );
 
     if(filtered.length === 0){
-        list.innerHTML = "No Files Found";
+        list.innerHTML = 'No Files Found';
         return;
     }
 
-    list.innerHTML = "";
+    list.innerHTML = '';
 
     filtered.forEach(file=>{
         list.innerHTML += `
-        <div class="file-box">
-            <div class="badge">${file.category}</div>
-            <div class="file-name">${file.name}</div>
-            <a href="${file.link}" target="_blank" onclick="increaseDownload()">
-                <button class="green">Download Now</button>
-            </a>
-        </div>`;
+            <div class="file-box">
+                <div class="badge">${file.category}</div>
+                <div class="file-name">${file.name}</div>
+                <a href="${file.link}" target="_blank" onclick="increaseDownload()">
+                    <button class="blue">Download Now</button>
+                </a>
+            </div>
+        `;
     });
 }
 
-/* DOWNLOAD */
 function increaseDownload(){
     totalDownloads++;
-    saveFiles();
+    saveData();
 }
 
-/* CLEAR */
 function clearAll(){
     files = [];
-    saveFiles();
-    adminStatus.innerText = "All Files Deleted ✅";
+    saveData();
+    loadFiles();
+    document.getElementById('adminStatus').innerText = 'All Files Deleted ✅';
 }
 
-/* 20 SEC AUTO CLOSE TAB */
-let idleTimer;
-
-function startIdleTimer(){
-    resetIdle();
-
-    ["mousemove","keydown","click","scroll","touchstart"].forEach(evt=>{
-        document.addEventListener(evt, resetIdle);
-    });
-}
-
-function resetIdle(){
-    clearTimeout(idleTimer);
-
-    idleTimer = setTimeout(()=>{
-        window.open('','_self');
-        window.close();
-
-        document.body.innerHTML = `
-        <div style="background:#000;color:#fff;height:100vh;display:flex;justify-content:center;align-items:center;font-family:Arial">
-        <div style="text-align:center">
-        <h1>Session Closed</h1>
-        <p>20 Seconds No Activity</p>
-        </div>
-        </div>`;
-    },20000);
-}
+updateStats();
+loadFiles();
+startSlider();
 </script>
 
 </body>
