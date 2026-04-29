@@ -14,7 +14,9 @@
 }
 
 body{
-    background:linear-gradient(135deg,#0f0f0f,#1a1a1a,#111);
+    background:linear-gradient(-45deg,#0f0f0f,#1a1a1a,#111,#181818);
+    background-size:400% 400%;
+    animation:bgMove 10s ease infinite;
     min-height:100vh;
     display:flex;
     justify-content:center;
@@ -32,12 +34,13 @@ body{
     padding:35px;
     color:white;
     box-shadow:0 20px 60px rgba(0,0,0,0.35);
-    animation:fadeIn 0.6s ease;
+    animation:fadeIn 0.7s ease;
 }
 
 h1{
     margin-bottom:15px;
     font-size:30px;
+    animation:slideDown 0.6s ease;
 }
 
 p{
@@ -52,6 +55,13 @@ input{
     border-radius:10px;
     margin:10px 0;
     font-size:15px;
+    outline:none;
+    transition:0.3s;
+}
+
+input:focus{
+    transform:scale(1.02);
+    box-shadow:0 0 15px rgba(255,255,255,0.15);
 }
 
 button{
@@ -66,32 +76,15 @@ button{
 }
 
 button:hover{
-    transform:translateY(-2px);
+    transform:translateY(-3px) scale(1.01);
 }
 
-.blue{
-    background:#007bff;
-    color:white;
-}
+.blue{ background:#007bff; color:white; }
+.green{ background:#28a745; color:white; }
+.red{ background:#dc3545; color:white; }
+.gray{ background:#444; color:white; }
 
-.green{
-    background:#28a745;
-    color:white;
-}
-
-.red{
-    background:#dc3545;
-    color:white;
-}
-
-.gray{
-    background:#444;
-    color:white;
-}
-
-.hidden{
-    display:none;
-}
+.hidden{ display:none; }
 
 .file-box{
     background:rgba(255,255,255,0.08);
@@ -99,6 +92,7 @@ button:hover{
     padding:14px;
     border-radius:12px;
     margin:12px 0;
+    animation:fadeIn 0.5s ease;
 }
 
 .file-name{
@@ -117,14 +111,19 @@ button:hover{
 }
 
 @keyframes fadeIn{
-    from{
-        opacity:0;
-        transform:translateY(20px);
-    }
-    to{
-        opacity:1;
-        transform:translateY(0);
-    }
+    from{ opacity:0; transform:translateY(20px); }
+    to{ opacity:1; transform:translateY(0); }
+}
+
+@keyframes slideDown{
+    from{ opacity:0; transform:translateY(-20px); }
+    to{ opacity:1; transform:translateY(0); }
+}
+
+@keyframes bgMove{
+    0%{ background-position:0% 50%; }
+    50%{ background-position:100% 50%; }
+    100%{ background-position:0% 50%; }
 }
 </style>
 </head>
@@ -132,7 +131,6 @@ button:hover{
 
 <div class="container">
 
-    <!-- MENU -->
     <div id="menuPage">
         <h1>Premium File Site</h1>
         <p>Select Panel</p>
@@ -141,7 +139,6 @@ button:hover{
         <button class="green" onclick="openUserPanel()">User Panel</button>
     </div>
 
-    <!-- PASSWORD -->
     <div id="passwordPage" class="hidden">
         <h1>Admin Login</h1>
         <p>Password Required</p>
@@ -154,7 +151,6 @@ button:hover{
         <p id="passStatus"></p>
     </div>
 
-    <!-- ADMIN -->
     <div id="adminPage" class="hidden">
         <h1>Admin Panel</h1>
         <p>Add File Link</p>
@@ -169,7 +165,6 @@ button:hover{
         <p id="adminStatus"></p>
     </div>
 
-    <!-- USER -->
     <div id="userPage" class="hidden">
         <h1>User Panel</h1>
         <p>Available Files</p>
@@ -203,6 +198,9 @@ function goHome(){
 function openPasswordPage(){
     hideAll();
     document.getElementById("passwordPage").classList.remove("hidden");
+    setTimeout(() => {
+        document.getElementById("adminPassword").focus();
+    }, 100);
 }
 
 function openUserPanel(){
@@ -234,11 +232,7 @@ function addFile(){
         return;
     }
 
-    files.push({
-        name:name,
-        link:link
-    });
-
+    files.push({ name, link });
     saveFiles();
 
     document.getElementById("fileName").value = "";
@@ -274,6 +268,26 @@ function clearAll(){
     saveFiles();
     document.getElementById("adminStatus").innerText = "All Files Deleted ✅";
 }
+
+// ENTER KEY SUPPORT
+
+document.getElementById("adminPassword").addEventListener("keydown", function(e){
+    if(e.key === "Enter"){
+        checkPassword();
+    }
+});
+
+document.getElementById("fileName").addEventListener("keydown", function(e){
+    if(e.key === "Enter"){
+        document.getElementById("fileLink").focus();
+    }
+});
+
+document.getElementById("fileLink").addEventListener("keydown", function(e){
+    if(e.key === "Enter"){
+        addFile();
+    }
+});
 </script>
 
 </body>
